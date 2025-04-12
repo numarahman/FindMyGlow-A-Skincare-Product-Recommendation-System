@@ -1,0 +1,12 @@
+# Virtual Environment
+.venv
+
+# Compiled Python files
+__pycache__/
+*.py[cod]
+
+# OS-specific files
+.DS_Store
+
+# Render logs or temporary files
+*.log

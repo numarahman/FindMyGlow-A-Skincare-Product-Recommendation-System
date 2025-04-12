@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.product_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>{{ product.product_name }}</h1>
+
+    <div class="container">
+        <div class="product-card">
+            <h3>{{ product.product_name }}</h3>
+            <p><strong>Brand:</strong> {{ product.brand_name }}</p>
+            <p><strong>Category:</strong> {{ product.product_category }}</p>
+            <p><strong>Price:</strong> ${{ product.price_usd }}</p>
+            <p><strong>Rating:</strong> {{ product.rating }}</p>
+            <p><strong>Love Counts:</strong> {{ product.loves_count }}</p>
+            <p><strong>Size:</strong> {{ product.size }}</p>
+            <p><strong>Sephora Exclusive:</strong> {{ 'Yes' if product.sephora_exclusive == 1 else 'No' }}</p>
+            <p><strong>Best For:</strong>
+                {% set skin_types = [] %}
+                {% if product.for_dry_skin %} {% set _ = skin_types.append('Dry Skin') %} {% endif %}
+                {% if product.for_oily_skin %} {% set _ = skin_types.append('Oily Skin') %} {% endif %}
+                {% if product.for_combination_skin %} {% set _ = skin_types.append('Combination Skin') %} {% endif %}
+                {{ ', '.join(skin_types) }}
+            </p>
+            <p><strong>Ingredients:</strong> {{ product.ingredients }}</p>
+            <p><strong>Highlights:</strong> {{ product.highlights }}</p>
+        </div>
+
+        <h2>More Products Like This</h2>
+        {% for product in similar_products %}
+            <div class="product-card">
+                <h3>{{ product.product_name }}</h3>
+                <p><strong>Brand:</strong> {{ product.brand_name }}</p>
+                <p><strong>Category:</strong> {{ product.product_category }}</p>
+                <p><strong>Price:</strong> ${{ product.price_usd }}</p>
+                <a href="{{ url_for('product', product_id=product.product_id) }}">
+                    <button>View Product</button>
+                </a>
+            </div>
+        {% endfor %}
+
+        <h2>More From {{ product.brand_name }}</h2>
+        {% for product in brand_products %}
+            <div class="product-card">
+                <h3>{{ product.product_name }}</h3>
+                <p><strong>Brand:</strong> {{ product.brand_name }}</p>
+                <p><strong>Category:</strong> {{ product.product_category }}</p>
+                <p><strong>Price:</strong> ${{ product.price_usd }}</p>
+                <a href="{{ url_for('product', product_id=product.product_id) }}">
+                    <button>View Product</button>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FindMyGlow: A Skincare Product Recommender System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>FindMyGlow: A Skincare Product Recommendation System</h1>
+    <h3>Find products tailored to your preferences!</h3>
+    <div class="container">
+        <div style="text-align: center;">
+            <img src="{{ url_for('static', filename='skincarepic.png') }}" alt="Skincare Visual" style="width: 100%; max-width: 300px; border-radius: 12px; margin-top: 20px;">
+        </div>
+
+        <form class="filter-form" method="POST" action="/results">
+            <h2>Filter Products</h2>
+
+            <!-- Product Category -->
+            <div class="filter-group">
+                <label><b>Product Type:</b></label>
+                <label><input type="checkbox" name="product_category" value="Moisturizers"> Moisturizers</label>
+                <label><input type="checkbox" name="product_category" value="Serums"> Serums</label>
+                <label><input type="checkbox" name="product_category" value="Cleansers"> Cleansers</label>
+                <label><input type="checkbox" name="product_category" value="Masks"> Masks</label>
+                <label><input type="checkbox" name="product_category" value="Eye Care"> Eye Care</label>
+                <label><input type="checkbox" name="product_category" value="Sunscreen"> Sunscreen</label>
+
+
+                <!-- Add more as needed -->
+            </div>
+
+            <!-- Skin Type -->
+            <div class="filter-group">
+                <label><b>Skin Type:</b></label>
+                <label><input type="checkbox" name="skin_type" value="for_dry_skin"> Dry</label>
+                <label><input type="checkbox" name="skin_type" value="for_oily_skin"> Oily</label>
+                <label><input type="checkbox" name="skin_type" value="for_combination_skin"> Combination</label>
+            </div>
+
+            <!-- Price Category -->
+            <div class="filter-group">
+                <label><b>Price Range:</b></label>
+                <label><input type="checkbox" name="price_category" value="0-15"> $0–15</label>
+                <label><input type="checkbox" name="price_category" value="16-30"> $16–30</label>
+                <label><input type="checkbox" name="price_category" value="31-45"> $31–45</label>
+                <label><input type="checkbox" name="price_category" value="46-60"> $46–60</label>
+                <label><input type="checkbox" name="price_category" value="61+"> $61+</label>
+            </div>
+
+            <div class="filter-group">
+                <label><b>Constraints:</b></label>
+                <label><input type="checkbox" name="is_alcohol_free" value="1"> Alcohol Free</label>
+                <label><input type="checkbox" name="is_hypoallergenic" value="1"> Hypoallergenic</label>
+                <label><input type="checkbox" name="is_vegan" value="1"> Vegan</label>
+            </div>
+
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</body>
+</html>
