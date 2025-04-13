@@ -62,3 +62,23 @@ body {
 .product-card button:hover {
     background-color: #bf7581;
 }
+
+.home-button,
+.back-button {
+    position: absolute;
+    top: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    background-color: #e7b6c2;
+    padding: 6px 12px;
+    border-radius: 5px;
+}
+
+.home-button {
+    left: 10px;
+}
+
+.back-button {
+    left: 120px;
+}
