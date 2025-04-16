@@ -10,3 +10,5 @@ __pycache__/
 
 # Render logs or temporary files
 *.log
+
+.csv
