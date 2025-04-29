@@ -51,6 +51,7 @@ This histogram shows that moisturizers and treatments are the most common produc
 
 This dataset contained sephora products and its reviews, so I filtered the dataset to only include skincare products. Each product included attributes like name, brand, category, price, size, ingredients, highlights, Sephora exclusivity, and loves count.
 
+![product_distribution](static/product_distribution.png)
 
 <b>Cleaning Steps:</b>
   * Removed products with key missing details such as ingredients
@@ -96,7 +97,7 @@ Step-by-Step Process:
 
 After computing the cosine similarity scores for each product, I created a network graph to visualize how skincare products relate to one another using cosine similarity scores. Each node represents a product, and each line represents a similarity score of 90% or higher between two products, based on shared product details. This graph revealed strong clusters within product categories and showed how interconnected the categories are. 
 
-
+![network_graph](static/network_graph.png)
 
 ## Website Creation using Flask
 
@@ -133,11 +134,23 @@ Files and Their Functions:
 
 Users begin on the homepage, seen below, by selecting filters. These filters are processed in the backend using strict matching for category and price, and flexible filtering for skin types and constraints. 
 
+### Homepage
+![website_homepage](static/website_homepage.png)
+
+
 After submitting, the website displays a list of recommended products, seen below, that match the filters, automatically sorted by relevance. 
+
+### Results Page
+![results_page](static/results_page.png)
+
 
 Clicking on a product leads to a detailed page showing full product information, along with two sections: “More Products Like This”, shown in Figure 5, which uses cosine similarity scores to show the top 5 most similar products, and “More From This Brand”, which lists more products by the same brand. These sections help users discover alternatives and explore related options easily.
 
+### Product Detail Page and "More Like This"
+![product_page](static/product_page.png)
 
+### "More from This Brand"
+![more_from_brand](static/more_from_brand.png)
 
 ## Advanced Topics
 
