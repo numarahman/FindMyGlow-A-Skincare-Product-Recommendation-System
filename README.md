@@ -7,6 +7,7 @@
 # Table of Contents
 ---
   * Introduction
+  * Overview of Advanced Topics
   * Gathering and Cleaning Data
     * Dataset Description
     * Data Cleaning
@@ -17,12 +18,23 @@
       * Filtering Mechanism
   * Website Creation Using Flask
   * Navigating Through the Website
-  * Overview of Advanced Topics
   * Conclusion
 
-## Introduction
+## Introduction 👋
 
 The skincare industry can be overwhelming with so many products available on the market, so I wanted to build something that helps people cut through the noise. There are thousands of products out there all claiming different benefits, but it’s not always easy to know what’s actually right for your skin. Factors like skin type, sensitivity, ingredient preferences, and price range play a role in what works best for each person. My goal was to create a tool that helps users discover products based on their needs, using features that truly matter. 
+
+## Advanced Topics
+
+<b>Feature Engineering (0.5 points)</b> - Applied one-hot encoding to skin type flags and filtered price ranges to better support simpler filtering in the webiste
+
+<b>Database Creation (1 point)</b> - I designed and implemented a SQLite database to store the skincare product dataset for easy web app integration
+
+<b>Website Using Flask (1 point)</b> - I built a full web application using Flask to create an interactive user experience
+
+<b>Cosine Similarity (1 point)</b> - I used cosine similarity to compute how similar products are to one another.
+
+<b>Natural Language Processing (2 points)</b> - I applied TF-IDF vectorization to ingredient and highlight fields to transform unstructured text into meaningful numerical features for measuring similarity between products.
 
 
 ## Gathering and Cleaning Data
@@ -151,18 +163,6 @@ Clicking on a product leads to a detailed page showing full product information,
 
 ### "More from This Brand"
 ![more_from_brand](static/more_from_brand.png)
-
-## Advanced Topics
-
-<b>Feature Engineering (0.5 points)</b> - Applied one-hot encoding to skin type flags and filtered price ranges to better support simpler filtering in the webiste
-
-<b>Database Creation (1 point)</b> - I designed and implemented a SQLite database to store the skincare product dataset for easy web app integration
-
-<b>Website Using Flask (1 point)</b> - I built a full web application using Flask to create an interactive user experience
-
-<b>Cosine Similarity (1 point)</b> - I used cosine similarity to compute how similar products are to one another.
-
-<b>Natural Language Processing (2 points)</b> - I applied TF-IDF vectorization to ingredient and highlight fields to transform unstructured text into meaningful numerical features for measuring similarity between products.
 
 
 ## Conclusion
