@@ -46,12 +46,12 @@ I found this data from a publicly available dataset on Kaggle containing over 2,
 
 This histogram shows that moisturizers and treatments are the most common product types, with the widest price spread, indicating a high variety in both budget and premium offerings. The color coding reveals how different price tiers are represented within each product type, helping highlight which categories tend to skew affordable versus luxury.
 
+![product_distribution](static/product_distribution.png)
 
 ### Data Cleaning
 
 This dataset contained sephora products and its reviews, so I filtered the dataset to only include skincare products. Each product included attributes like name, brand, category, price, size, ingredients, highlights, Sephora exclusivity, and loves count.
 
-![product_distribution](static/product_distribution.png)
 
 <b>Cleaning Steps:</b>
   * Removed products with key missing details such as ingredients
