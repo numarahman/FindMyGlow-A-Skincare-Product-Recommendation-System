@@ -10,11 +10,11 @@
   * Gathering and Cleaning Data
     * Dataset Description
     * Data Cleaning
+  * Database Creation
   * Building out the Recommender System
       * Feature Engineering
       * Cosine Similarity
       * Filtering Mechanism
-  * Database Creation
   * Website Creation Using Flask
   * Navigating Through the Website
   * Overview of Advanced Topics
@@ -62,9 +62,13 @@ This dataset contained sephora products and its reviews, so I filtered the datas
   * Added a "price_range" to separate the products based on affordability
 
 
+## Database Creation
+
+To efficiently send data to the web app, I stored product information into an SQLite database. I did this by install the SQLite package through VSCode and inputed my dataframe into a database.
+
 ## Building out the Recommender System 👨‍💻
 
-After cleaning my data, I was able to start buidling out the recommender system.
+After integrating the data into a database, I was able to start buidling out the recommender system.
 
 ### Feature Engineering (TF-IDF)
 
@@ -80,15 +84,44 @@ This process can be seen in recommender.ipynb
 ### Cosine Similarity
 
 Once I had the TF-IDF matrix, I computed the cosine similarity between all products. Cosine similarity measures how similar two products are by calculating the angles between their vectors. Scores close to 1 mean they are very similar, and scores closer to 0 means they are very different. In the context of this project, each product's ingredients and highlights were vectorized by using TF-IDF. Then, I used cosine similarity quantified how closely two products align in terms of those vectors. 
-I decided to use cosine similarity it allowed me to ignore the absolute number of ingredients and focus purely on how similar the content was. For example, two products might have different lengths of ingredient lists, but if they both emphasize "hyaluronic acid" and "glycerin," cosine similarity would recognize them as similar.
+
+I decided to use cosine similarity it allowed me to ignore the absolute number of ingredients and focus purely on how similar the content was. For example, two products might have different lengths of ingredient lists, but if they both emphasize "hyaluronic acid" and "glycerin," cosine similarity would recognize them as similar. By using both TF-IDF and cosine similarity, the model understand what makes a product unique and to find and rank other products that are the most similar based on content.
 
 Step-by-Step Process:
  * After constructing the combined TF-IDF matrix, I calculated the pairwise cosine similarity matrix
  * Each row of the matrix represents a product, and each column shows how similar it is to other products
  * For each product, I extracted the top 5 most similar products and stored them in a dictionary for quick lookup when users view a product
 
-By using both TF-IDF and cosine similarity,the model understand what makes a product unique and to find and rank other products that are the most similar based on content.
+
+After computing the cosine similarity scores for each product, I created a network graph to visualize how skincare products relate to one another using cosine similarity scores. Each node represents a product, and each line represents a similarity score of 90% or higher between two products, based on shared product details. This graph revealed strong clusters within product categories and showed how interconnected the categories are. 
 
 
+
+## Website Creation using Flask
+
+I built a Flask web application to allow users to interact with the recommender system in a user-friendly manner.
+
+Files and Their Functions:
+ * app.py:
+  * Main Flask application file
+  * It handles the route, connects to database, displays filters, processes filters, and retrieved filtered products
+  * Uses cosine similarity to rank results to users based on their desired filters. This allows the recommendations to be sorted by relevance rather than exact match
+  * Uses cosine similarity on product page to show the top 5 most similar products and other products from the same brand
+ * index.html:
+  * Homepage template
+  * Contains where users select filters: product type, skin type, budget, brand, and product constraints
+  * Submits filters to the /results route
+ * results.html
+  * Results page template
+  * Displays a list of products that match user-selected filters
+  * Each product links to its own detail page
+ * product.html
+  * Product detail page template
+  * Displays detailed product information (name, brand, price, ingredients, highlights, loves count)
+  * Shows recommended similar products (cosine similarity) and products from the same brand
+ * style.css:
+  * Custom CSS File
+  * Styles homepage, results page, and product pages
+  * Includes styling for dropdown menus, product cards, navigation buttons, and page layout
 
 
