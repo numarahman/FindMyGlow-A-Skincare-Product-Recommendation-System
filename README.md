@@ -24,6 +24,7 @@
 
 The skincare industry can be overwhelming with so many products available on the market, so I wanted to build something that helps people cut through the noise. There are thousands of products out there all claiming different benefits, but it’s not always easy to know what’s actually right for your skin. Factors like skin type, sensitivity, ingredient preferences, and price range play a role in what works best for each person. My goal was to create a tool that helps users discover products based on their needs, using features that truly matter. 
 
+
 ## Gathering and Cleaning Data
 
 ### Gathering Data
@@ -72,7 +73,7 @@ After integrating the data into a database, I was able to start buidling out the
 
 ### Feature Engineering and Natural Language Processing (TF-IDF)
 
-Term frequency-inverse document frequency (TF-IDF) converts a piece of text into a numerical vector to highlight which words are most important in a piece of text while downplaying common ones. Since the "ingredients" and "highlights" fields were in free-text form, I needed a way to extract meaningful numerical features from them. TF-IDF allowed me to assign higher weights to distinctive terms like "hyaluronic acid" or "salicylic acid," rather than common words like "water." Without it, the model wouldn't understand which ingredients make products unique.
+Term frequency-inverse document frequency (TF-IDF) in a natural language processing technique that converts a piece of text into a numerical vector to highlight which words are most important in a piece of text while downplaying common ones. Since the "ingredients" and "highlights" fields were in free-text form, I needed a way to extract meaningful numerical features from them. TF-IDF allowed me to assign higher weights to distinctive terms like "hyaluronic acid" or "salicylic acid," rather than common words like "water." Without it, the model wouldn't understand which ingredients make products unique.
 
 Step-by-Step Process:
  * Preprocessed text by lowercasing, removing punctuation, and removing common stop words such as "and" or "with"
@@ -102,28 +103,28 @@ After computing the cosine similarity scores for each product, I created a netwo
 I built a Flask web application to allow users to interact with the recommender system in a user-friendly manner.
 
 Files and Their Functions:
- * app.py:
+ * <b>app.py:</b>
    * Main Flask application file
    * It handles the route, connects to database, displays filters, processes filters, and retrieved filtered products
    * Uses cosine similarity to rank results to users based on their desired filters. This allows the recommendations to be sorted by relevance rather than exact match
    * Uses cosine similarity on product page to show the top 5 most similar products and other products from the same brand
  
- * index.html:
+ * <b>index.html:</b>
    * Homepage template
    * Contains where users select filters: product type, skin type, budget, brand, and product constraints
    * Submits filters to the /results route
   
- * results.html
+ * <b>results.html</b>
    * Results page template
    * Displays a list of products that match user-selected filters
    * Each product links to its own detail page
  
- * product.html
+ * <b>product.html</b>
    * Product detail page template
    * Displays detailed product information (name, brand, price, ingredients, highlights, loves count)
    * Shows recommended similar products (cosine similarity) and products from the same brand
   
- * style.css:
+ * <b>style.css:</b>
    * Styles homepage, results page, and product pages
    * Includes styling for dropdown menus, product cards, navigation buttons, and page layout
   
@@ -140,15 +141,15 @@ Clicking on a product leads to a detailed page showing full product information,
 
 ## Advanced Topics
 
-Feature Engineering (0.5 points) - Applied one-hot encoding to skin type flags and filtered price ranges to better support simpler filtering in the webiste
+<b>Feature Engineering (0.5 points)</b> - Applied one-hot encoding to skin type flags and filtered price ranges to better support simpler filtering in the webiste
 
-Database Creation (1 point) - I designed and implemented a SQLite database to store the skincare product dataset for easy web app integration
+<b>Database Creation (1 point)</b> - I designed and implemented a SQLite database to store the skincare product dataset for easy web app integration
 
-Website Using Flask (1 point) - I built a full web application using Flask to create an interactive user experience
+<b>Website Using Flask (1 point)</b> - I built a full web application using Flask to create an interactive user experience
 
-Cosine Similarity (1 point) - I used cosine similarity to compute how similar products are to one another.
+<b>Cosine Similarity (1 point)</b> - I used cosine similarity to compute how similar products are to one another.
 
-Natural Language Processing (2 points) - I applied TF-IDF vectorization to ingredient and highlight fields to transform unstructured text into meaningful numerical features for measuring similarity between products.
+<b>Natural Language Processing (2 points)</b> - I applied TF-IDF vectorization to ingredient and highlight fields to transform unstructured text into meaningful numerical features for measuring similarity between products.
 
 
 ## Conclusion
