@@ -29,29 +29,29 @@ The skincare industry can be overwhelming with so many products available on the
 ### Gathering Data
 I found this data from a publicly available dataset on Kaggle containing over 2,000 skincare products from Sephora. This is the link to the dataset: https://www.kaggle.com/datasets/nadyinky/sephora-products-and-skincare-reviews
 
-Key Variable:
-  * product_name: Name of product
-  * brand_name: Name of brand
-  * product_category: Kind of skincare product (e.g., moisturizer, cleanser, treatments, etc)
-  * price: Price of product
-  * ingredients: String of ingredients in product
-  * highlights: What makes the product unique. Includes tags like "alcohol free", "cruelty free", "paraben free", "Hypoallergenic", etc.
-  * for_dry_skin: Dummy variable for classifying if the product is good for dry skin
-  * for_oily_skin: Dummy variable for classifying if the product is good for oily skin
-  * for_combination_skin: Dummy variable for classifying if the product is good for combination skin
-  * rating: Average rating of a product
-  * love_counts: Number of people who loved the product
-  * sephora_exclusive: Products only sold at Sephora
+<b>Key Variable:</b>
+  * <b> product_name:</b> Name of product
+  * <b> brand_name:</b>  Name of brand
+  * <b> product_category:</b> Kind of skincare product (e.g., moisturizer, cleanser, treatments, etc)
+  * <b> price:</b> Price of product
+  * <b> ingredients:</b> String of ingredients in product
+  * <b> highlights:</b> What makes the product unique. Includes tags like "alcohol free", "cruelty free", "paraben free", "Hypoallergenic", etc.
+  * <b> for_dry_skin:</b> Dummy variable for classifying if the product is good for dry skin
+  * <b> for_oily_skin:</b> Dummy variable for classifying if the product is good for oily skin
+  * <b> for_combination_skin:</b> Dummy variable for classifying if the product is good for combination skin
+  * <b> rating:</b> Average rating of a product
+  * <b> love_counts:</b> Number of people who loved the product
+  * <b> sephora_exclusive:</b> Products only sold at Sephora
 
 This histogram shows that moisturizers and treatments are the most common product types, with the widest price spread, indicating a high variety in both budget and premium offerings. The color coding reveals how different price tiers are represented within each product type, helping highlight which categories tend to skew affordable versus luxury.
 
 
-## Data Cleaning
+### Data Cleaning
 
 This dataset contained sephora products and its reviews, so I filtered the dataset to only include skincare products. Each product included attributes like name, brand, category, price, size, ingredients, highlights, Sephora exclusivity, and loves count.
 
 
-Cleaning Steps:
+<b>Cleaning Steps:</b>
   * Removed products with key missing details such as ingredients
     * I viewed ingredients as the most important feature to use for recommending. 
   * Filled missing values with appropriate values
@@ -62,6 +62,33 @@ Cleaning Steps:
   * Added a "price_range" to separate the products based on affordability
 
 
-## Building out the Recommender System
+## Building out the Recommender System 👨‍💻
 
-On
+After cleaning my data, I was able to start buidling out the recommender system.
+
+### Feature Engineering (TF-IDF)
+
+Term frequency-inverse document frequency (TF-IDF) converts a piece of text into a numerical vector to highlight which words are most important in a piece of text while downplaying common ones. Since the "ingredients" and "highlights" fields were in free-text form, I needed a way to extract meaningful numerical features from them. TF-IDF allowed me to assign higher weights to distinctive terms like "hyaluronic acid" or "salicylic acid," rather than common words like "water." Without it, the model wouldn't understand which ingredients make products unique.
+
+Step-by-Step Process:
+ * Preprocessed text by lowercasing, removing punctuation, and removing common stop words such as "and" or "with"
+ * Used TfidfVectorizer from Scikit-learn to numerically represent the text in the ingredients and highlights fields. This allowed me to quantify how important a term is to a product relative to the rest by helping the model understand semantic meaning behind the text.
+ * Combined TF-IDF matrices of "ingredients" and "highlights" to create a full product representation
+
+This process can be seen in recommender.ipynb
+
+### Cosine Similarity
+
+Once I had the TF-IDF matrix, I computed the cosine similarity between all products. Cosine similarity measures how similar two products are by calculating the angles between their vectors. Scores close to 1 mean they are very similar, and scores closer to 0 means they are very different. In the context of this project, each product's ingredients and highlights were vectorized by using TF-IDF. Then, I used cosine similarity quantified how closely two products align in terms of those vectors. 
+I decided to use cosine similarity it allowed me to ignore the absolute number of ingredients and focus purely on how similar the content was. For example, two products might have different lengths of ingredient lists, but if they both emphasize "hyaluronic acid" and "glycerin," cosine similarity would recognize them as similar.
+
+Step-by-Step Process:
+ * After constructing the combined TF-IDF matrix, I calculated the pairwise cosine similarity matrix
+ * Each row of the matrix represents a product, and each column shows how similar it is to other products
+ * For each product, I extracted the top 5 most similar products and stored them in a dictionary for quick lookup when users view a product
+
+By using both TF-IDF and cosine similarity,the model understand what makes a product unique and to find and rank other products that are the most similar based on content.
+
+
+
+
