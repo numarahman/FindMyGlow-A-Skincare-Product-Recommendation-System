@@ -12,7 +12,7 @@
     * Data Cleaning
   * Database Creation
   * Building out the Recommender System
-      * Feature Engineering
+      * Feature Engineering and Natural Language Processing
       * Cosine Similarity
       * Filtering Mechanism
   * Website Creation Using Flask
@@ -70,7 +70,7 @@ To efficiently send data to the web app, I stored product information into an SQ
 
 After integrating the data into a database, I was able to start buidling out the recommender system.
 
-### Feature Engineering (TF-IDF)
+### Feature Engineering and Natural Language Processing (TF-IDF)
 
 Term frequency-inverse document frequency (TF-IDF) converts a piece of text into a numerical vector to highlight which words are most important in a piece of text while downplaying common ones. Since the "ingredients" and "highlights" fields were in free-text form, I needed a way to extract meaningful numerical features from them. TF-IDF allowed me to assign higher weights to distinctive terms like "hyaluronic acid" or "salicylic acid," rather than common words like "water." Without it, the model wouldn't understand which ingredients make products unique.
 
@@ -103,25 +103,56 @@ I built a Flask web application to allow users to interact with the recommender 
 
 Files and Their Functions:
  * app.py:
-  * Main Flask application file
-  * It handles the route, connects to database, displays filters, processes filters, and retrieved filtered products
-  * Uses cosine similarity to rank results to users based on their desired filters. This allows the recommendations to be sorted by relevance rather than exact match
-  * Uses cosine similarity on product page to show the top 5 most similar products and other products from the same brand
+   * Main Flask application file
+   * It handles the route, connects to database, displays filters, processes filters, and retrieved filtered products
+   * Uses cosine similarity to rank results to users based on their desired filters. This allows the recommendations to be sorted by relevance rather than exact match
+   * Uses cosine similarity on product page to show the top 5 most similar products and other products from the same brand
+ 
  * index.html:
-  * Homepage template
-  * Contains where users select filters: product type, skin type, budget, brand, and product constraints
-  * Submits filters to the /results route
+   * Homepage template
+   * Contains where users select filters: product type, skin type, budget, brand, and product constraints
+   * Submits filters to the /results route
+  
  * results.html
-  * Results page template
-  * Displays a list of products that match user-selected filters
-  * Each product links to its own detail page
+   * Results page template
+   * Displays a list of products that match user-selected filters
+   * Each product links to its own detail page
+ 
  * product.html
-  * Product detail page template
-  * Displays detailed product information (name, brand, price, ingredients, highlights, loves count)
-  * Shows recommended similar products (cosine similarity) and products from the same brand
+   * Product detail page template
+   * Displays detailed product information (name, brand, price, ingredients, highlights, loves count)
+   * Shows recommended similar products (cosine similarity) and products from the same brand
+  
  * style.css:
-  * Custom CSS File
-  * Styles homepage, results page, and product pages
-  * Includes styling for dropdown menus, product cards, navigation buttons, and page layout
+   * Styles homepage, results page, and product pages
+   * Includes styling for dropdown menus, product cards, navigation buttons, and page layout
+  
+
+## Navigating Through Website
+
+Users begin on the homepage, seen below, by selecting filters. These filters are processed in the backend using strict matching for category and price, and flexible filtering for skin types and constraints. 
+
+After submitting, the website displays a list of recommended products, seen below, that match the filters, automatically sorted by relevance. 
+
+Clicking on a product leads to a detailed page showing full product information, along with two sections: “More Products Like This”, shown in Figure 5, which uses cosine similarity scores to show the top 5 most similar products, and “More From This Brand”, which lists more products by the same brand. These sections help users discover alternatives and explore related options easily.
+
+
+
+## Advanced Topics
+
+Feature Engineering (0.5 points) - Applied one-hot encoding to skin type flags and filtered price ranges to better support simpler filtering in the webiste
+
+Database Creation (1 point) - I designed and implemented a SQLite database to store the skincare product dataset for easy web app integration
+
+Website Using Flask (1 point) - I built a full web application using Flask to create an interactive user experience
+
+Cosine Similarity (1 point) - I used cosine similarity to compute how similar products are to one another.
+
+Natural Language Processing (2 points) - I applied TF-IDF vectorization to ingredient and highlight fields to transform unstructured text into meaningful numerical features for measuring similarity between products.
+
+
+## Conclusion
+
+Overall, Find My Glow is a content-based skincare recommender that offers real value to users looking for new skincare options, especially those unsure where to start. It gives people a smarter, more personalized way to shop by making skincare more accessible, personalized, and informed. 
 
 
