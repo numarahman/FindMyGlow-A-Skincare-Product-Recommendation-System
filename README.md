@@ -1,5 +1,5 @@
 # FindMyGlow - Skincare Product Recommender System
-- April 29th 2024
+- April 29th 2025
 - DSC 4900 - Data Science Project/Portfolio
 - Belmont University
 - Author: Numa Rahman
